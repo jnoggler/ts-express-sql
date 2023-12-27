@@ -2,6 +2,7 @@ import express from "express";
 import pinoHttp from "pino-http";
 
 import logger from "./logger";
+import config from "./config";
 
 const app = express();
 
@@ -26,12 +27,10 @@ app.use(pinoHttp({
   },
 }));
 
-const port = process.env.PORT || 3000;
-
 app.get("/", (req, res) => {
   res.send("Hello world!");
 });
 
-app.listen(port, () => {
-  logger.info(`Server is running at http://localhost:${port}`);
+app.listen(config.port, () => {
+  logger.info(`Server is running at http://localhost:${config.port}`);
 });
