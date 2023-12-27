@@ -4,6 +4,8 @@ import pinoHttp from "pino-http";
 import logger from "./logger";
 import config from "./config";
 
+import routes from "./api/routes";
+
 const app = express();
 
 app.use(pinoHttp({
@@ -27,9 +29,7 @@ app.use(pinoHttp({
   },
 }));
 
-app.get("/", (req, res) => {
-  res.send("Hello world!");
-});
+app.use(routes);
 
 app.listen(config.port, () => {
   logger.info(`Server is running at http://localhost:${config.port}`);
