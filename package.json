@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc && node dist/index.js | pino-pretty"
+    "dev": "tsc && node dist/index.js"
   },
   "keywords": [],
   "author": "",

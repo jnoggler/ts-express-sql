@@ -12,10 +12,8 @@ const options: StrategyOptions = {
 };
 
 const jwtPassportStrategy = new Strategy(options, (jwtPayload, done) => {
-    logger.info('jwtPayload', jwtPayload);
-    // do something with payload like checking if user still exists
+    // do something with payload here, like checking if user still exists
     return done(null, jwtPayload);
-
     // if we want to reject, we would 'return done(null, false);'
 });
 

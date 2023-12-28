@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import {validate} from '../../validation/validator';
+import {validateBody} from '../../validation/validator';
 import { getHelloWorld, postLogin } from './publicController';
 import { postLoginSchema } from './publicSchema';
 
@@ -10,6 +10,6 @@ const router = Router({
 
 router.get('/hello-world', getHelloWorld);
 
-router.post('/login', validate(postLoginSchema), postLogin);
+router.post('/login', validateBody(postLoginSchema), postLogin);
 
 export default router;

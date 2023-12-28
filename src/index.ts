@@ -4,6 +4,7 @@ import passport from "passport";
 
 import logger, {httpLogger} from "./logger";
 import config from "./config";
+import {handleError} from './error/errorHandler';
 import passportJwtConfig from './auth/passportJwtConfig';
 import routes from "./api/routes";
 
@@ -19,6 +20,8 @@ passport.use(passportJwtConfig);
 app.use(passport.initialize());
 
 app.use(routes);
+
+app.use(handleError);
 
 app.listen(config.port, () => {
   logger.info(`Server is running at http://localhost:${config.port}`);
