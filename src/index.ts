@@ -1,8 +1,11 @@
 import express from "express";
 import pinoHttp from "pino-http";
+import helmet from "helmet";
+import passport from "passport";
 
 import logger from "./logger";
 import config from "./config";
+import passportJwtConfig from './auth/passportJwtConfig';
 
 import routes from "./api/routes";
 
@@ -28,6 +31,13 @@ app.use(pinoHttp({
     return 'request errored with status code: ' + res.statusCode
   },
 }));
+
+app.use(helmet());
+
+app.use(express.json({limit: '1mb'}));
+
+passport.use(passportJwtConfig);
+app.use(passport.initialize());
 
 app.use(routes);
 

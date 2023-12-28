@@ -1,7 +1,7 @@
 import pino from "pino";
 
 const logger = pino({
-    // config comes here
+    // extra config comes here
 });
 
 export default logger;
