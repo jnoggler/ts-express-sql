@@ -9,14 +9,9 @@ export function getHelloWorld(req: Request, res: Response) {
 };
 
 export function postLogin(req: Request, res: Response) {
-  logger.info('request body:', req.body);
   const username = req.body.username;
   const password = req.body.password;
 
-  logger.info(`username: ${username}, password: ${password}`);
-
   const token = login(username, password);
-
-  logger.info(`token: ${token}`);
   res.send({token});
 };
