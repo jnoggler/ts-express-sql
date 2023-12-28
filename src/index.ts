@@ -5,7 +5,6 @@ import passport from "passport";
 import logger, {httpLogger} from "./logger";
 import config from "./config";
 import passportJwtConfig from './auth/passportJwtConfig';
-
 import routes from "./api/routes";
 
 const app = express();
