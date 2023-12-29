@@ -19,4 +19,9 @@ describe('Protected API tests', () => {
         expect(response.status).toBe(200);
         expect(response.body).toEqual({message: 'Top Secret!'});
     });
+
+    test('Test private content response without token', async () => {
+        const response = await supertest(app).get('/protected/private-content');
+        expect(response.status).toBe(401);
+    });
 });
