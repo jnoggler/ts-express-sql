@@ -7,7 +7,7 @@
     "dev": "tsc && node dist/index.js",
     "test": "vitest",
     "lint": "eslint src/ test/ --ext .ts",
-    "format": "prettier --write src/**/*.ts test/**/*.ts"
+    "format": "prettier --write src/ test/"
   },
   "keywords": [],
   "author": "",

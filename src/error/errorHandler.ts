@@ -11,7 +11,7 @@ export function handleError(
   err: Error,
   req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ): void {
   req.log.error(err);
   res.status(err instanceof BaseError ? err.httpStatusCode : 500).send(

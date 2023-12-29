@@ -4,6 +4,7 @@ import { verify } from 'jsonwebtoken';
 
 import config from '../../src/config';
 import app from '../../src/app';
+import { JwtPayload } from '../../src/api/public/publicService';
 
 describe('Public API tests', () => {
   test('Test hello world response', async () => {
@@ -19,7 +20,10 @@ describe('Public API tests', () => {
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('token');
 
-    const verified = verify(response.body.token, config.jwtSecret) as any;
+    const verified = verify(
+      response.body.token,
+      config.jwtSecret,
+    ) as JwtPayload;
     expect(verified.username).toBe('admin');
   });
 });

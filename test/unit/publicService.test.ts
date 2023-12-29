@@ -4,6 +4,7 @@ import { verify } from 'jsonwebtoken';
 import config from '../../src/config';
 
 import {
+  JwtPayload,
   createHelloWorldResponse,
   login,
 } from '../../src/api/public/publicService';
@@ -18,7 +19,7 @@ describe('Public service tests', () => {
     const token = login('admin', 'admin');
     expect(token).toBeTypeOf('string');
 
-    const verified = verify(token, config.jwtSecret) as any;
+    const verified = verify(token, config.jwtSecret) as JwtPayload;
     expect(verified.username).toBe('admin');
   });
 });

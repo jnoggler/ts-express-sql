@@ -4,7 +4,7 @@ import passport from 'passport';
 import { getPrivateContent } from './protectedController';
 
 const router = Router({
-    mergeParams: true,
+  mergeParams: true,
 });
 
 router.use(passport.authenticate('jwt', { session: false }));

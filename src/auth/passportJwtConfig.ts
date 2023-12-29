@@ -1,7 +1,6 @@
 import { ExtractJwt, StrategyOptions, Strategy } from 'passport-jwt';
 
 import config from '../config';
-import logger from '../logger';
 
 const options: StrategyOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

@@ -1,5 +1,5 @@
 export class BaseError extends Error {
-  public details: any;
+  public details: object;
 
   public httpStatusCode: number;
 
@@ -7,13 +7,13 @@ export class BaseError extends Error {
     httpStatusCode: number,
     name: string,
     message: string,
-    details?: any,
+    details?: object,
   ) {
     super(message);
 
     this.httpStatusCode = httpStatusCode;
     this.name = name;
-    this.details = details;
+    this.details = details || {};
 
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, BaseError);
@@ -22,7 +22,7 @@ export class BaseError extends Error {
 }
 
 export class BadRequestError extends BaseError {
-  constructor(message: string, details?: any) {
+  constructor(message: string, details?: object) {
     super(400, 'BAD_REQUEST_ERROR', message, details);
   }
 }
