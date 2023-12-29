@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import { Router } from 'express';
 
 import publicRoutes from './public/publicRoutes';
 import protectedRoutes from './protected/protectedRoutes';
