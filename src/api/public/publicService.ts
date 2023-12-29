@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import config from '../../config';
 
 export function createHelloWorldResponse() {
-    return 'Hello world!';
+    return 'Hello World!';
 }
 
 export function login(username: string, password: string) {
