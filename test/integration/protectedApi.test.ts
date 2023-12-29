@@ -1,0 +1,22 @@
+import {describe, test, expect, beforeAll} from 'vitest';
+import supertest from 'supertest';
+
+import {login} from '../../src/api/public/publicService';
+import app from '../../src/app';
+
+describe('Protected API tests', () => {
+    let token: string;
+
+    beforeAll(() => {
+        token = login('admin', 'admin');
+        if (!token) {
+            throw new Error('Could not log in');
+        }
+    });
+
+    test('Test private content response', async () => {
+        const response = await supertest(app).get('/protected/private-content').set('Authorization', `Bearer ${token}`);
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({message: 'Top Secret!'});
+    });
+});
