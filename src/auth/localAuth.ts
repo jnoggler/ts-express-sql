@@ -8,7 +8,7 @@ const options: IStrategyOptions = {
   */
 };
 
-const localPassportStrategy = new Strategy(
+export const localStrategy = new Strategy(
   options,
   (username, password, done) => {
     // validate the username and password combination here
@@ -18,5 +18,3 @@ const localPassportStrategy = new Strategy(
     return done(null, false);
   },
 );
-
-export default localPassportStrategy;

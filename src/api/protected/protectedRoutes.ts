@@ -13,7 +13,9 @@ const router = Router({
   mergeParams: true,
 });
 
-router.use(passport.authenticate('jwt', { session: false }));
+router.use(
+  passport.authenticate(['jwtHeader', 'jwtCookie'], { session: false }),
+);
 
 router.get('/private-content', getPrivateContent);
 

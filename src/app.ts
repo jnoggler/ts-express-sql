@@ -6,8 +6,8 @@ import passport from 'passport';
 
 import { httpLogger } from './logger';
 import { handleError } from './error/errorHandler';
-import jwtPassportStrategy from './auth/jwtPassportStrategy';
-import localPassportStrategy from './auth/localPassportStrategy';
+import { jwtAuthHeaderStrategy, jwtCookieStrategy } from './auth/jwtAuth';
+import { localStrategy } from './auth/localAuth';
 import routes from './api/routes';
 
 const app = express();
@@ -32,8 +32,9 @@ app.use(
 
 app.use(express.json({ limit: '1mb' }));
 
-passport.use(localPassportStrategy);
-passport.use(jwtPassportStrategy);
+passport.use('local', localStrategy);
+passport.use('jwtHeader', jwtAuthHeaderStrategy);
+passport.use('jwtCookie', jwtCookieStrategy);
 app.use(passport.initialize());
 
 app.use(routes);
