@@ -1,17 +1,32 @@
-import pino from 'pino';
+import pino, { LoggerOptions } from 'pino';
 import pinoHttp from 'pino-http';
 
 import config from './config';
 
-const logger = pino({
-  level: config.nodeEnv === 'production' ? 'info' : 'debug',
-  transport: {
-    target: 'pino-pretty',
-    options: {
-      colorize: true,
-    },
-  },
-});
+const pinoConfig: LoggerOptions =
+  config.nodeEnv === 'production'
+    ? {
+        level: 'info',
+        // print to STDOUT in production
+        transport: {
+          target: 'pino/file',
+          options: {
+            destination: 1,
+          },
+        },
+      }
+    : {
+        level: 'debug',
+        // pretty print to STDOUT in every other environment
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            colorize: true,
+          },
+        },
+      };
+
+const logger = pino(pinoConfig);
 
 export const httpLogger = pinoHttp({
   logger,
@@ -21,7 +36,9 @@ export const httpLogger = pinoHttp({
     } else if (res.statusCode >= 500 || err) {
       return 'error';
     }
-    return 'info';
+    // set the normal http request logging level to 'debug', to avoid logging every request in production.
+    // Basic http request logging is most likely handled by a proxy like nginx in this case.
+    return 'debug';
   },
 });
 
