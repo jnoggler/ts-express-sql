@@ -4,7 +4,8 @@ import passport from 'passport';
 
 import { httpLogger } from './logger';
 import { handleError } from './error/errorHandler';
-import passportJwtConfig from './auth/passportJwtConfig';
+import jwtPassportStrategy from './auth/jwtPassportStrategy';
+import localPassportStrategy from './auth/localPassportStrategy';
 import routes from './api/routes';
 
 const app = express();
@@ -15,7 +16,8 @@ app.use(helmet());
 
 app.use(express.json({ limit: '1mb' }));
 
-passport.use(passportJwtConfig);
+passport.use(localPassportStrategy);
+passport.use(jwtPassportStrategy);
 app.use(passport.initialize());
 
 app.use(routes);
