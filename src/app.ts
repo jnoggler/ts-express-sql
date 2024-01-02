@@ -1,5 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
+import nocache from 'nocache';
 import passport from 'passport';
 
 import { httpLogger } from './logger';
@@ -13,6 +14,7 @@ const app = express();
 app.use(httpLogger);
 
 app.use(helmet());
+app.use(nocache());
 
 app.use(express.json({ limit: '1mb' }));
 
