@@ -39,3 +39,5 @@ DATABASE_URL="postgresql://postgres:password@localhost:5432/databaseName?schema=
 Run the database migrations with `npx prisma migrate dev`.
 
 You can then start the project with `npm run dev`.
+
+Run tests via `npm run test`.
