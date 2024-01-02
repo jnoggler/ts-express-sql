@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc && node dist/index.js",
+    "dev": "tsc && node dist/src/index.js",
     "test": "vitest",
     "lint": "eslint src/ test/ --ext .ts",
     "format": "prettier --write src/ test/"
