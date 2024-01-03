@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { createHelloWorldResponse, login } from './publicService';
+import config from '../../config';
 
 export function getHelloWorld(req: Request, res: Response) {
   const message = createHelloWorldResponse();
@@ -12,5 +13,10 @@ export function postLogin(req: Request, res: Response) {
   const password = req.body.password;
 
   const token = login(username, password);
+
+  res.cookie('token', token, {
+    httpOnly: true,
+    secure: config.nodeEnv === 'production',
+  });
   res.send({ token });
 }

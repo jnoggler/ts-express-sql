@@ -1,7 +1,9 @@
 import express from 'express';
 import helmet from 'helmet';
 import nocache from 'nocache';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
+
 import passport from 'passport';
 
 import { httpLogger } from './logger';
@@ -16,6 +18,8 @@ app.use(httpLogger);
 
 app.use(helmet());
 app.use(nocache());
+app.use(cookieParser());
+app.use(express.json({ limit: '1mb' }));
 
 app.use(
   cors({
@@ -29,8 +33,6 @@ app.use(
     },
   }),
 );
-
-app.use(express.json({ limit: '1mb' }));
 
 passport.use('local', localStrategy);
 passport.use('jwtHeader', jwtAuthHeaderStrategy);

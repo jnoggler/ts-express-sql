@@ -14,7 +14,7 @@ describe('Protected API tests', () => {
     }
   });
 
-  test('Test private content response', async () => {
+  test('Test private content response with Bearer token', async () => {
     const response = await supertest(app)
       .get('/protected/private-content')
       .set('Authorization', `Bearer ${token}`);
@@ -25,5 +25,16 @@ describe('Protected API tests', () => {
   test('Test private content response without token', async () => {
     const response = await supertest(app).get('/protected/private-content');
     expect(response.status).toBe(401);
+  });
+
+  test('Test private content response with valid token in cookie', async () => {
+    const agent = supertest.agent(app);
+    const response = await agent
+      .get('/protected/private-content')
+      .set('Cookie', [`token=${token}`])
+      .send();
+    console.log(response.body);
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({ message: 'Top Secret!' });
   });
 });
