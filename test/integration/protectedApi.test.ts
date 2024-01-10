@@ -22,11 +22,6 @@ describe('Protected API tests', () => {
     expect(response.body).toEqual({ message: 'Top Secret!' });
   });
 
-  test('Test private content response without token', async () => {
-    const response = await supertest(app).get('/protected/private-content');
-    expect(response.status).toBe(401);
-  });
-
   test('Test private content response with valid token in cookie', async () => {
     const agent = supertest.agent(app);
     const response = await agent
@@ -36,5 +31,10 @@ describe('Protected API tests', () => {
     console.log(response.body);
     expect(response.status).toBe(200);
     expect(response.body).toEqual({ message: 'Top Secret!' });
+  });
+
+  test('Test private content response without token', async () => {
+    const response = await supertest(app).get('/protected/private-content');
+    expect(response.status).toBe(401);
   });
 });
