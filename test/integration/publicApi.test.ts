@@ -4,7 +4,7 @@ import { verify } from 'jsonwebtoken';
 
 import config from '../../src/config';
 import app from '../../src/app';
-import { JwtPayload } from '../../src/api/public/publicService';
+import { JwtPayload } from '../../src/auth/types';
 
 describe('Public API tests', () => {
   test('Test hello world response', async () => {

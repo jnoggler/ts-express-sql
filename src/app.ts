@@ -3,7 +3,6 @@ import helmet from 'helmet';
 import nocache from 'nocache';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-
 import passport from 'passport';
 
 import { httpLogger } from './logger';

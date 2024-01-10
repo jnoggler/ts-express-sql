@@ -1,10 +1,6 @@
 import { expect, test, describe, beforeEach } from 'vitest';
 
-import {
-  createPrivateContent,
-  createUser,
-  getUsers,
-} from '../../src/api/protected/protectedService';
+import { protectedService } from '../../src/api/protected/protectedService';
 import prisma from '../../src/db/client';
 
 describe('Protected service tests', () => {
@@ -19,19 +15,19 @@ describe('Protected service tests', () => {
   });
 
   test('Test private content response', () => {
-    const response = createPrivateContent();
+    const response = protectedService.createPrivateContent();
     expect(response).toBe('Top Secret!');
   });
 
   test('Test get users', async () => {
-    const users = await getUsers();
+    const users = await protectedService.getUsers();
     expect(users).toBeInstanceOf(Array);
     expect(users.length).toBe(1);
     expect(users[0].username).toBe('test');
   });
 
   test('Test create user', async () => {
-    const createdUser = await createUser('test2', 'test2');
+    const createdUser = await protectedService.createUser('test2', 'test2');
     expect(createdUser).toBeInstanceOf(Object);
     expect(createdUser.username).toBe('test2');
 

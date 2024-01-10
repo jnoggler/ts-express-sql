@@ -1,14 +1,14 @@
 import { describe, test, expect, beforeAll } from 'vitest';
 import supertest from 'supertest';
 
-import { login } from '../../src/api/public/publicService';
+import { publicService } from '../../src/api/public/publicService';
 import app from '../../src/app';
 
 describe('Protected API tests', () => {
   let token: string;
 
   beforeAll(() => {
-    token = login('admin', 'admin');
+    token = publicService.login('admin');
     if (!token) {
       throw new Error('Could not log in');
     }

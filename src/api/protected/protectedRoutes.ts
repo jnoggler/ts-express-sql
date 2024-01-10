@@ -1,11 +1,7 @@
 import { Router } from 'express';
 import passport from 'passport';
 
-import {
-  getPrivateContent,
-  getUsers,
-  postCreateUser,
-} from './protectedController';
+import { protectedController } from './protectedController';
 import { validateBody } from '../../validation/validator';
 import { postCreateUserSchema } from './protectedSchema';
 
@@ -17,10 +13,14 @@ router.use(
   passport.authenticate(['jwtHeader', 'jwtCookie'], { session: false }),
 );
 
-router.get('/private-content', getPrivateContent);
+router.get('/private-content', protectedController.getPrivateContent);
 
-router.get('/users', getUsers);
+router.get('/users', protectedController.getUsers);
 
-router.post('/users', validateBody(postCreateUserSchema), postCreateUser);
+router.post(
+  '/users',
+  validateBody(postCreateUserSchema),
+  protectedController.createUser,
+);
 
 export default router;

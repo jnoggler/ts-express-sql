@@ -2,14 +2,14 @@ import { Router } from 'express';
 import passport from 'passport';
 
 import { validateBody } from '../../validation/validator';
-import { getHelloWorld, postLogin } from './publicController';
+import { publicController } from './publicController';
 import { postLoginSchema } from './publicSchema';
 
 const router = Router({
   mergeParams: true,
 });
 
-router.get('/hello-world', getHelloWorld);
+router.get('/hello-world', publicController.getHelloWorld);
 
 router.post(
   '/login',
@@ -19,7 +19,7 @@ router.post(
       session: false,
     }),
   ],
-  postLogin,
+  publicController.login,
 );
 
 export default router;

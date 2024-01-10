@@ -1,15 +1,15 @@
 import prisma from '../../db/client';
 
-export function createPrivateContent() {
+function createPrivateContent() {
   return 'Top Secret!';
 }
 
-export async function getUsers() {
+async function getUsers() {
   const users = await prisma.user.findMany();
   return users;
 }
 
-export async function createUser(username: string, password: string) {
+async function createUser(username: string, password: string) {
   const user = await prisma.user.create({
     data: {
       username,
@@ -18,3 +18,9 @@ export async function createUser(username: string, password: string) {
   });
   return user;
 }
+
+export const protectedService = {
+  createPrivateContent,
+  getUsers,
+  createUser,
+};

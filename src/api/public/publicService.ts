@@ -1,18 +1,20 @@
 import jwt from 'jsonwebtoken';
 
 import config from '../../config';
+import { JwtPayload } from '../../auth/types';
 
-export function createHelloWorldResponse() {
+function createHelloWorldResponse() {
   return 'Hello World!';
 }
 
-export type JwtPayload = {
-  username: string;
-};
-
-export function login(username: string, password: string) {
+function login(username: string) {
   const jwtPayload: JwtPayload = { username };
 
   const token = jwt.sign(jwtPayload, config.jwtSecret, { expiresIn: '1h' });
   return token;
 }
+
+export const publicService = {
+  createHelloWorldResponse,
+  login,
+};
