@@ -19,7 +19,6 @@ export const passwordHashing = Prisma.defineExtension({
     user: {
       create: async ({ args, query }) => {
         const hashedPassword = await hashPassword(args.data.password);
-        console.log('hashedPassword', hashedPassword);
         args.data.password = hashedPassword;
         return query(args);
       },
@@ -28,7 +27,6 @@ export const passwordHashing = Prisma.defineExtension({
           const hashedPassword = await hashPassword(
             args.data.password.toString(), // not sure about this yet
           );
-          console.log('hashedPassword', hashedPassword);
           args.data.password = hashedPassword;
         }
         return query(args);

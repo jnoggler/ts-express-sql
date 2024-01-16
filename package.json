@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc && node dist/src/index.js",
-    "test": "vitest",
+    "test": "vitest --no-file-parallelism",
     "lint": "eslint src/ test/ --ext .ts",
     "format": "prettier --write src/ test/"
   },

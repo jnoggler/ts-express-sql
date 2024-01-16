@@ -37,7 +37,6 @@ const jwtCookieOptions: StrategyOptions = {
   jwtFromRequest: ExtractJwt.fromExtractors([
     (request) => {
       let token = null;
-      console.log('request cookies', request.cookies);
       if (request && request.cookies) {
         token = request.cookies['token'];
       }

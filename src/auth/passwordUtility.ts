@@ -25,7 +25,6 @@ $2b$10$nOUIs5kJ7naTuTFkBy1veuK0kSxUFXfuaOKdOKf9xYT0KKIGSJwFa
  */
 
 export async function hashPassword(password: string): Promise<string> {
-  console.log('in hash password function', password);
   const hashedPassword = await hash(password, SALT_ROUNDS);
   return hashedPassword;
 }
